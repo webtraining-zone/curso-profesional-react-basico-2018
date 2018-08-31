@@ -1,0 +1,48 @@
+<html>
+<link rel="stylesheet" href="css/7-styling.css">
+<body>
+
+    <div id="root">
+
+    </div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+
+      const appElement = document.getElementById('root');
+
+      const handleClick = () => {
+        console.log('Click');
+      };
+
+      const handleMouseOver = () => {
+        console.log('MouseOver');
+      };
+
+      const handleOnChange = (event) => {
+        // console.log(event.nativeEvent);
+        console.log('Input value:', event.target.value);
+      };
+
+      const Button = ({type, style, ...propsRest}) => {
+        const modifierClassName = type ? `btn btn-${type}` : 'btn btn-default';
+        const inlineStyle = {padding: 20, ...style};
+
+        return <button className={modifierClassName} style={inlineStyle} {...propsRest} />;
+      };
+
+      const element = (
+          <div className="b-main-container">
+            <p><Button type="success" onMouseOver={handleMouseOver}>Success</Button></p>
+            <p><Button type="primary" onClick={handleClick}>Primary</Button></p>
+            <p><Button type="danger" onClick={handleClick}>Danger</Button></p>
+            <input type="text" onChange={handleOnChange}/>
+          </div>
+      );
+
+      ReactDOM.render(element, appElement);
+    </script>
+</body>
+
+</html>
