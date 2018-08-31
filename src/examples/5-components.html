@@ -1,0 +1,53 @@
+<html>
+
+<body>
+
+    <div id="app">
+
+    </div>
+    <script crossOrigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossOrigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+      // Let's use JSX + Interporlation
+      const message = 'Welcome to JSX + Interpolation';
+      const today = new Date();
+      const dynamicCSSClass = today.getHours() > 12 ? 'b-main-container--night' : 'b-main-container--day';
+      const appElement = document.getElementById('app');
+
+      const externalProps = {
+        children: [message, ' on ', today.toString()],
+      };
+
+      // const printDayMessage = (props) => <div> { props.children } <br /> </div>
+      // const element = (
+      //     <div className={ dynamicCSSClass }>
+      //         { printDayMessage(externalProps) }
+      //         { printDayMessage(externalProps) }
+      //     </div>
+      // )
+      // const element = (
+      //     <div className={ dynamicCSSClass }>
+      //         // React.createElement can also take a function as parameter
+      //         { React.createElement(printDayMessage, externalProps) }
+      //         { React.createElement(printDayMessage, externalProps) }
+      //     </div>
+      // )
+
+      // const PrintDayMessage = function(props) {
+      //   return <div> {props.children} <br/></div>;
+      // };
+
+      const PrintDayMessage = (props) => <div> {props.children} <br/></div>;
+      const component = (
+          <div className={dynamicCSSClass}>
+            // React.createElement can also take a function as parameter
+            <PrintDayMessage {...externalProps} />
+            <PrintDayMessage>Is it going to happen or not? :)</PrintDayMessage>
+          </div>
+      );
+      ReactDOM.render(component, appElement);
+    </script>
+</body>
+
+</html>
