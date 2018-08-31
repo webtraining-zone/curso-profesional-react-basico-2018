@@ -1,0 +1,40 @@
+<html>
+
+<body>
+
+    <div id="root">
+        Loading...
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Read more about Babel Standalone https://github.com/babel/babel-standalone -->
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      class JSXPropsDemo {
+        run() {
+          // Let's use JSX + Interporlation
+          const message = 'Welcome to JSX + Interpolation';
+          const today = new Date();
+          const dynamicCSSClass = today.getHours() > 12 ? 'b-main-container--night' : 'b-main-container--day';
+          const appElement = document.getElementById('root');
+          const numbers = [2, 4, 5].map( number => `#${number}, `);
+
+          const myProps = {
+            className: dynamicCSSClass,
+            children: [message, ' on ', today.toString(), numbers],
+          };
+
+          const element = <div {...myProps} />;
+          ReactDOM.render(element, appElement);
+        }
+      }
+
+      new JSXPropsDemo().run();
+
+    </script>
+</body>
+
+</html>
