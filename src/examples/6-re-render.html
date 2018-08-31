@@ -1,0 +1,35 @@
+<html>
+
+<body>
+
+    <div id="root">
+
+    </div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+      const appElement = document.getElementById('root');
+      let counter = 0;
+
+      function refresh() {
+
+        const element = (
+            <div className="b-main-container">
+              <strong>Current value </strong>
+              <input value={counter}/>
+            </div>
+        );
+
+        counter = counter + 1;
+
+        ReactDOM.render(element, appElement);
+      }
+
+      // Keep the focus & only refresh what has changed!
+      setInterval(refresh, 500);
+
+    </script>
+</body>
+
+</html>
