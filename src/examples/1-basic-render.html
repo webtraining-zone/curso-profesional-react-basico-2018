@@ -1,0 +1,34 @@
+<html>
+
+<body>
+
+    <div id="app">
+        Loading...
+    </div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script type="text/javascript">
+      // No Framework, just Vanilla JavaScript
+      // var appElement = document.getElementById('app');
+      // var element = document.createElement('div');
+
+      // element.textContent = 'Welcome!';
+      // element.className = 'b-main-container';
+
+      // appElement.appendChild(element);
+
+      // Let's "React"
+      var appElement = document.getElementById('app');
+      var element = React.createElement(
+          'div',
+          {className: 'b-main-container'},
+          'Welcome to React!',
+      );
+
+      ReactDOM.render(element, appElement);
+    </script>
+</body>
+
+</html>
