@@ -1,0 +1,129 @@
+<html>
+<link rel="stylesheet" href="css/7-styling.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    h1,
+    p {
+        margin: 0;
+    }
+
+    .b-root {
+        margin: 0 auto;
+        font-size: 100px;
+        text-align: center;
+    }
+
+    .b-checkbox {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    .b-stack {
+        border-color: #17a2b8;
+        background-color: lightsteelblue;
+        min-width: 200px;
+        font-size: 20px;
+        padding: 10px;
+        margin: 10px auto;
+        /*border-radius: 20px;*/
+    }
+</style>
+<body>
+
+    <div id="root" class="b-root">
+        Loading...
+    </div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+
+      class Randomizer extends React.Component {
+
+        state = {number: 0, stack: [], isStackVisible: true};
+
+        constructor(...args) {
+          super(...args);
+
+          // We must bind our handler to the "this" object
+          // this.handleClick = this.handleClick.bind(this);
+          this.handleCheck = this.handleCheck.bind(this);
+        }
+
+        static getRandomIntInclusive(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+        }
+
+        // handleClick() {
+        //   const newNumber = this.constructor.getRandomIntInclusive(0, 1000);
+        //   // "concat" returns a NEW array!
+        //   const newStack = [...this.state.stack, newNumber]; //state.stack.concat([number]);
+        //
+        //   this.setState({number: newNumber, stack: newStack});
+        // }
+
+        // handleClick = function() {
+        //   const newNumber = this.constructor.getRandomIntInclusive(0, 1000);
+        //   // "concat" returns a NEW array!
+        //   const newStack = [...this.state.stack, newNumber]; //state.stack.concat([number]);
+        //
+        //   this.setState({number: newNumber, stack: newStack});
+        // }.bind(this);
+
+        handleClick = () => {
+          const newNumber = this.constructor.getRandomIntInclusive(0, 1000);
+          // "concat" returns a NEW array!
+          const newStack = [...this.state.stack, newNumber]; //state.stack.concat([number]);
+
+          this.setState({number: newNumber, stack: newStack});
+        };
+
+        handleCheck() {
+          this.setState({isStackVisible: !this.state.isStackVisible});
+        }
+
+        render() {
+          return (
+              <div>
+                <h1>{this.state.number}</h1>
+                <p>
+                  <button onClick={this.handleClick} className="btn btn-primary">
+                    Random number
+                  </button>
+                </p>
+                <p className="b-checkbox">
+                  <input type="checkbox"
+                         onChange={this.handleCheck}
+                         defaultChecked={this.state.isStackVisible}/> See previous numbers...
+                </p>
+                <p className="b-stack">
+                  {
+                    this.state.isStackVisible ?
+                        <span>{JSON.stringify(this.state.stack)}</span> : <span>Stack no visible</span>
+                  }
+                </p>
+              </div>
+          );
+        }
+
+      }
+
+      function render() {
+        const appElement = document.querySelector('#root');
+        const component = (<Randomizer/>);
+        ReactDOM.render(component, appElement);
+      }
+
+      render();
+
+
+    </script>
+</body>
+
+</html>
