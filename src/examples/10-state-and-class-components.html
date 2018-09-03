@@ -77,15 +77,20 @@
         // }.bind(this);
 
         handleClick = () => {
-          const newNumber = this.constructor.getRandomIntInclusive(0, 1000);
-          // "concat" returns a NEW array!
-          const newStack = [...this.state.stack, newNumber]; //state.stack.concat([number]);
 
-          this.setState({number: newNumber, stack: newStack});
+          const newNumber = this.constructor.getRandomIntInclusive(0, 1000);
+          // this.setState({number: newNumber, stack: newStack});
+          this.setState((prevState, props) => {
+            const newStack = [...prevState.stack, newNumber]; //state.stack.concat([number]);
+            return {number: newNumber, stack: newStack};
+          });
         };
 
         handleCheck() {
-          this.setState({isStackVisible: !this.state.isStackVisible});
+          // this.setState({isStackVisible: !this.state.isStackVisible});
+          this.setState(function(prevState, props) {
+            return {isStackVisible: !prevState.isStackVisible};
+          });
         }
 
         render() {
